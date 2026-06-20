@@ -1,0 +1,123 @@
+:root {
+  --bg: #f4f1ea;
+  --paper: #fffef9;
+  --ink: #1f2933;
+  --muted: #6b7280;
+  --line: #d8d2c4;
+  --accent: #334155;
+}
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--ink); background: var(--bg); font-family: system-ui, -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.app-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 18px 24px; background: #172033; color: white; }
+.app-header h1 { margin: 0 0 4px; font-size: 20px; }
+.app-header p { margin: 0; color: #cbd5e1; font-size: 13px; }
+button { appearance: none; border: 1px solid #94a3b8; background: white; color: #172033; border-radius: 8px; padding: 9px 13px; cursor: pointer; font-weight: 600; }
+button:disabled { opacity: .45; cursor: not-allowed; }
+.shell { display: grid; grid-template-columns: 330px minmax(0, 1fr); min-height: calc(100vh - 77px); }
+.sidebar { border-right: 1px solid var(--line); padding: 16px; background: #fbfaf6; overflow: auto; }
+.dropzone { display: grid; place-items: center; gap: 8px; min-height: 130px; border: 2px dashed #a8a29e; border-radius: 14px; text-align: center; cursor: pointer; padding: 16px; color: #44403c; background: white; }
+.dropzone.dragover { border-color: #334155; background: #eef2ff; }
+.dropzone input { display: none; }
+.dropzone span { font-size: 12px; color: var(--muted); }
+.panel { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); }
+.panel h2 { margin: 0 0 8px; font-size: 14px; color: #334155; }
+.file-list, .toc { font-size: 13px; }
+.empty { color: var(--muted); }
+.file-item { width: 100%; display: block; text-align: left; margin: 6px 0; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: white; color: var(--ink); overflow-wrap: anywhere; }
+.file-item.active { outline: 2px solid #64748b; }
+.toc a { display: block; color: #334155; text-decoration: none; padding: 4px 0 4px var(--indent, 0); overflow-wrap: anywhere; }
+.toc a:hover { text-decoration: underline; }
+.viewer-wrap { padding: 22px; overflow: auto; }
+.status { margin: 0 auto 14px; max-width: 980px; color: var(--muted); font-size: 13px; }
+.law-document { max-width: 980px; min-height: 70vh; margin: 0 auto; padding: 48px 58px; background: var(--paper); border: 1px solid var(--line); box-shadow: 0 16px 40px rgba(15, 23, 42, .08); line-height: 1.9; font-family: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", serif; }
+.law-document:empty { display: none; }
+.law-title { margin: 0 0 28px; text-align: center; font-size: 24px; letter-spacing: .04em; }
+.law-meta { text-align: center; color: var(--muted); font-size: 13px; margin-bottom: 22px; }
+.part-title, .chapter-title, .section-title, .subsection-title, .division-title, .suppl-title { text-align: center; font-weight: 700; margin: 24px 0 12px; }
+.part-title { font-size: 19px; }
+.chapter-title { font-size: 18px; }
+.section-title, .subsection-title, .division-title { font-size: 16px; }
+.article { margin: 18px 0; }
+.article-caption { font-weight: 700; margin-bottom: 2px; }
+.article-title { font-weight: 700; margin-bottom: 4px; }
+.paragraph { display: grid; grid-template-columns: 2.8em 1fr; gap: .25em; margin: 2px 0; }
+.paragraph-number { text-align: right; padding-right: .6em; color: #374151; }
+.paragraph-number.empty-num { color: transparent; }
+.sentence { display: inline; }
+.item, .subitem1, .subitem2, .subitem3, .subitem4, .subitem5, .subitem6, .subitem7, .subitem8, .subitem9, .subitem10 { display: grid; gap: .3em; margin: 2px 0; }
+.item { grid-template-columns: 3.6em 1fr; margin-left: 2.8em; }
+.subitem1 { grid-template-columns: 3em 1fr; margin-left: 6.4em; }
+.subitem2 { grid-template-columns: 3em 1fr; margin-left: 9.4em; }
+.subitem3, .subitem4, .subitem5, .subitem6, .subitem7, .subitem8, .subitem9, .subitem10 { grid-template-columns: 3em 1fr; margin-left: 12em; }
+.item-title { text-align: right; padding-right: .5em; }
+ruby rt { font-size: .55em; }
+sup, sub { font-size: .75em; }
+.line { display: block; }
+.law-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-family: inherit; font-size: 14px; }
+.law-table td, .law-table th { border: 1px solid #9ca3af; padding: 6px 8px; vertical-align: top; }
+.remarks, .appdx, .toc-block { margin: 18px 0; padding: 12px 14px; border-left: 4px solid #cbd5e1; background: #f8fafc; }
+.generic-block { margin: 8px 0; }
+.error { color: #b91c1c; }
+@media print {
+  body { background: white; }
+  .app-header, .sidebar, .status { display: none !important; }
+  .shell { display: block; }
+  .viewer-wrap { padding: 0; }
+  .law-document { box-shadow: none; border: 0; max-width: none; padding: 18mm; }
+}
+@media (max-width: 860px) {
+  .shell { grid-template-columns: 1fr; }
+  .sidebar { border-right: 0; border-bottom: 1px solid var(--line); }
+  .law-document { padding: 28px 22px; }
+}
+.control-label { display: block; margin: 8px 0; font-size: 12px; color: var(--muted); }
+.control-label select { width: 100%; margin-top: 4px; padding: 8px; border: 1px solid var(--line); border-radius: 8px; background: white; color: var(--ink); }
+.xslt-document { font-family: initial; line-height: normal; }
+.xslt-output { overflow-x: auto; }
+.xslt-output table { border-collapse: collapse; }
+.xslt-output img { max-width: 100%; height: auto; }
+.xslt-output a { color: inherit; }
+.fallback-document { line-height: 1.9; font-family: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", serif; }
+
+.xslt-host { max-width: none; min-height: 70vh; margin: 0; padding: 0; background: transparent; border: 0; box-shadow: none; }
+.xslt-frame { display: block; width: 100%; min-height: calc(100vh - 150px); border: 1px solid var(--line); background: white; }
+@media print {
+  .xslt-host { margin: 0; padding: 0; }
+  .xslt-frame { width: 100%; height: 100vh; border: 0; }
+}
+.controls label { display:block; margin: 10px 0; font-size: 12px; color:#4b5563; }
+.controls select { width:100%; margin-top:4px; padding:6px 8px; border:1px solid #d1d5db; border-radius:8px; background:#fff; }
+.xslt-frame { background:#fff; }
+
+.generic-viewer-host, .file-preview, .text-preview, .csv-preview, .tiff-preview {
+  max-width: none;
+  min-height: 70vh;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.file-frame { display:block; width:100%; min-height: calc(100vh - 150px); border:1px solid var(--line); background:#fff; }
+.pdf-frame { height: calc(100vh - 150px); }
+.html-frame { height: calc(100vh - 150px); }
+.image-preview { display:block; max-width:100%; height:auto; margin:0 auto; background:#fff; border:1px solid var(--line); }
+.source-preview { margin:0; padding:18px; white-space:pre-wrap; overflow:auto; background:#fff; border:1px solid var(--line); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:13px; line-height:1.55; }
+.csv-preview { overflow:auto; }
+.csv-table { border-collapse:collapse; background:#fff; font-size:13px; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif; }
+.csv-table th, .csv-table td { border:1px solid #cbd5e1; padding:5px 7px; white-space:pre; }
+.csv-table th { position:sticky; top:0; background:#f8fafc; }
+.tiff-page { margin:0 0 16px; padding:12px; background:#fff; border:1px solid var(--line); }
+.tiff-page figcaption { font-size:12px; color:var(--muted); margin-bottom:8px; }
+.tiff-page canvas { display:block; max-width:100%; height:auto; }
+.download-card { max-width:560px; padding:24px; background:#fff; border:1px solid var(--line); border-radius:12px; }
+.download-card a { display:inline-block; margin-top:8px; padding:8px 12px; border:1px solid #94a3b8; border-radius:8px; text-decoration:none; color:#172033; background:#fff; font-weight:700; }
+
+/* Accordion file list */
+.accordion-file-list { display: grid; gap: 8px; }
+.file-group { border: 1px solid var(--line); border-radius: 10px; background: #fff; overflow: hidden; }
+.file-group-summary { cursor: pointer; padding: 9px 10px; font-weight: 700; color: #334155; background: #f8fafc; user-select: none; }
+.file-group-body { padding: 6px 8px 8px; }
+.file-group-body .file-item { margin: 4px 0; border-color: #e5e7eb; }
+.file-group-system .file-group-summary,
+.file-group-other .file-group-summary { color: #64748b; background: #fafafa; }

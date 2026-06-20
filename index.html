@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>e-Gov 法令XML Viewer</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <h1>e-Gov 法令XML Viewer</h1>
+      <p>e-GovのZIP/XMLをローカルで読み込み、条・項・号・表を法令風レイアウトで表示します。</p>
+    </div>
+    <button id="printBtn" type="button" disabled>印刷 / PDF</button>
+  </header>
+
+  <main class="shell">
+    <aside class="sidebar">
+      <label id="dropzone" class="dropzone">
+        <input id="fileInput" type="file" accept=".zip,.xml,.xsl,.xslt,.pdf,.png,.jpg,.jpeg,.gif,.webp,.tif,.tiff,.txt,.csv,.html,.htm,application/zip,text/xml,application/xml,application/pdf,image/*,text/*" />
+        <strong>ZIP / XML / PDF / 画像などをドロップ</strong>
+        <span>ZIP内のXML/XSL/PDF/画像/TIFF/TXT/CSV/HTMLをローカル表示します。</span>
+      </label>
+      <section class="panel controls">
+        <h2>表示設定</h2>
+        <label>XML表示
+          <select id="modeSelect">
+            <option value="auto">自動（XSL優先）</option>
+            <option value="xslt">XSLTのみ</option>
+            <option value="manual">簡易レンダラ</option>
+          </select>
+        </label>
+        <label>XSL
+          <select id="xslSelect" disabled><option>自動検出</option></select>
+        </label>
+        <label>帳票補正
+          <select id="compatSelect">
+            <option value="analyzed">帳票補正</option>
+            <option value="wide">横広がり＋印刷縮小</option>
+            <option value="screenfit">画面もA4縮小</option>
+            <option value="raw">XSL出力そのまま</option>
+            <option value="quirks">互換モード</option>
+            <option value="standards">標準モード</option>
+          </select>
+        </label>
+      </section>
+      <section class="panel">
+        <h2>ファイル</h2>
+        <div id="fileList" class="file-list empty">未読み込み</div>
+      </section>
+      <section class="panel">
+        <h2>目次</h2>
+        <nav id="toc" class="toc empty">表示後に生成されます</nav>
+      </section>
+    </aside>
+
+    <section class="viewer-wrap">
+      <div id="status" class="status">ZIP/XMLを読み込んでください。</div>
+      <article id="viewer" class="law-document"></article>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
